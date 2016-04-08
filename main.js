@@ -7,6 +7,23 @@ var mainState = {
     game.load.audio('jump', 'assets/jump.wav');
   },
   create: function() {
+
+    //mobile-friendly
+    if(game.device.desktop == false) {
+      // Set the scaling mode to SHOW_ALL to show all the game
+      game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+      // Set a minimum and maximum size for the game
+       // Here the minimum is half the game size
+       // And the maximum is the original game size
+      game.scale.setMinMax(game.width/2, game.height/2, game.width, game.height);
+      // Center the game horizontally and vertically
+      game.scale.pageAlignHorizontally = true;
+      game.scale.pageAlignVertically = true;
+    }
+
+   // Call the 'jump' function when we tap/click on the screen
+   game.input.onDown.add(this.jump, this);
+
     this.jumpSound = game.add.audio('jump');
     game.stage.backgroundColor = "#71c5cf";
     game.physics.startSystem(Phaser.Physics.ARCADE);
